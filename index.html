@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IG ELECTRONS | Premium Showroom</title>
+    <title>Vijay Electronics | Railway Road Mukerian</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
@@ -12,323 +12,305 @@
 
     <style>
         :root {
-            --brand: #4f46e5;
-            --brand-glow: rgba(79, 70, 229, 0.3);
+            --brand: #6366f1;
+            --brand-secondary: #f59e0b;
+            --brand-glow: rgba(99, 102, 241, 0.4);
             --surface: #020617;
             --card: #0f172a;
             --text: #f8fafc;
             --text-dim: #94a3b8;
-            --border: rgba(255, 255, 255, 0.06);
+            --border: rgba(255, 255, 255, 0.08);
             --whatsapp: #22c55e;
-            --glass: rgba(15, 23, 42, 0.8);
+            --glass: rgba(15, 23, 42, 0.85);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background: var(--surface); color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* PREMIUM NAV */
+        /* BACKGROUND ANIMATION */
+        .bg-glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; pointer-events: none;
+            background: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #020617 100%);
+        }
+        .orb {
+            position: absolute; background: var(--brand); border-radius: 50%;
+            filter: blur(80px); opacity: 0.1; animation: orbit 25s infinite linear;
+        }
+        @keyframes orbit {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(200px, 100px) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        /* NAVBAR */
         header {
             position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: var(--glass); backdrop-filter: blur(20px);
+            background: var(--glass); backdrop-filter: blur(30px);
             border-bottom: 1px solid var(--border); padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            transition: 0.3s;
         }
-        .logo { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; text-transform: uppercase; }
-        .logo span { color: var(--brand); text-shadow: 0 0 15px var(--brand-glow); }
-        .logo-subtitle { font-size: 0.65rem; color: var(--text-dim); font-weight: 400; letter-spacing: 0.5px; margin-top: 4px; text-transform: capitalize; }
-
-        .admin-login-btn {
-            width: 40px; height: 40px; border-radius: 12px;
-            background: var(--border); display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            color: var(--text-dim); border: 1px solid var(--border);
+        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; text-transform: uppercase; }
+        .logo span { 
+            background: linear-gradient(to right, #6366f1, #a855f7, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: colorShift 8s infinite alternate;
         }
-        .admin-login-btn:hover { background: var(--brand); color: white; transform: scale(1.05); border-color: var(--brand); }
+        @keyframes colorShift { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(90deg); } }
 
-        /* SEARCH & HERO */
-        .hero-area { padding: 140px 5% 40px; text-align: center; background: radial-gradient(circle at top, #1e1b4b 0%, #020617 70%); }
-        .search-box { max-width: 550px; margin: 20px auto; position: relative; }
-        .search-box input {
-            width: 100%; padding: 18px 55px; background: var(--card);
-            border: 1px solid var(--border); border-radius: 18px; color: white;
-            font-size: 1rem; outline: none; transition: 0.3s;
+        /* FEATURE DISPLAY BOX */
+        .hero { padding: 160px 5% 40px; text-align: center; }
+        .feature-box {
+            max-width: 900px; margin: 0 auto; padding: 50px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border); border-radius: 40px;
+            box-shadow: 0 0 60px var(--brand-glow);
+            animation: floatHero 6s ease-in-out infinite;
         }
-        .search-box input:focus { border-color: var(--brand); box-shadow: 0 0 25px var(--brand-glow); }
-        .search-box i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-dim); font-size: 1.2rem; }
-
-        /* REVIEW SLIDER (FAST SNAPPY) */
-        .review-strip { background: rgba(255,255,255,0.02); padding: 15px 0; border-y: 1px solid var(--border); overflow: hidden; }
-        .review-track { display: flex; transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1); }
-        .rev-card { min-width: 100%; text-align: center; }
-        .rev-card p { font-size: 0.95rem; font-weight: 500; letter-spacing: 0.2px; }
-        .rev-card span { color: var(--brand); font-weight: 800; font-size: 0.7rem; text-transform: uppercase; margin-left: 10px; }
-
-        /* PRODUCT AREA */
-        .page-width { padding: 40px 5%; }
-        .tabs { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 25px; scrollbar-width: none; }
-        .tab { 
-            padding: 10px 24px; background: var(--card); border-radius: 12px; border: 1px solid var(--border);
-            cursor: pointer; white-space: nowrap; transition: 0.3s; font-weight: 600; font-size: 0.85rem; color: var(--text-dim);
+        @keyframes floatHero {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
-        .tab.active { background: var(--brand); border-color: var(--brand); color: white; box-shadow: 0 10px 20px var(--brand-glow); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        /* SEARCH BAR */
+        .search-container { max-width: 550px; margin: 40px auto; position: relative; }
+        .search-container input {
+            width: 100%; padding: 22px 65px; background: var(--card);
+            border: 1px solid var(--border); border-radius: 25px; color: white;
+            font-size: 1.1rem; outline: none; transition: 0.4s;
+        }
+        .search-container input:focus { border-color: var(--brand); box-shadow: 0 0 30px var(--brand-glow); }
+        .search-container i { position: absolute; left: 25px; top: 50%; transform: translateY(-50%); color: var(--brand); font-size: 1.4rem; }
+
+        /* PRODUCT GRID */
+        .page-width { padding: 40px 5% 100px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 35px; }
         .card { 
-            background: var(--card); border-radius: 28px; padding: 20px; 
-            border: 1px solid var(--border); transition: 0.4s cubic-bezier(0.2, 0, 0, 1);
+            background: var(--card); border-radius: 35px; padding: 25px; 
+            border: 1px solid var(--border); transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0; transform: translateY(40px);
         }
-        .card:hover { transform: translateY(-8px); border-color: var(--brand); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .card.reveal { opacity: 1; transform: translateY(0); }
+        .card:hover { transform: scale(1.03) translateY(-10px); border-color: var(--brand); box-shadow: 0 25px 50px rgba(0,0,0,0.6); }
         
-        .img-box { height: 220px; background: #000; border-radius: 20px; margin-bottom: 18px; display: flex; align-items: center; justify-content: center; }
-        .img-box img { max-width: 80%; max-height: 80%; object-fit: contain; }
+        .img-wrap { height: 250px; background: #000; border-radius: 25px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .img-wrap img { max-width: 80%; transition: 0.8s ease; }
+        .card:hover .img-wrap img { transform: scale(1.1) rotate(2deg); }
 
-        .price { font-size: 1.6rem; font-weight: 800; color: white; margin: 12px 0; }
-        .buy-btn { 
-            background: var(--whatsapp); color: white; padding: 15px; border-radius: 16px; 
-            font-weight: 800; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none;
+        .price { font-size: 1.8rem; font-weight: 900; color: white; margin: 15px 0; }
+        
+        /* WHATSAPP BUTTON */
+        .wa-btn { 
+            background: var(--whatsapp); color: white; padding: 18px; border-radius: 22px; 
+            font-weight: 800; width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;
             transition: 0.3s;
         }
+        .wa-btn:hover { background: #1aad53; transform: scale(1.02); }
 
-        /* CONTACT SECTION */
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; }
-        .contact-card { background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 30px; text-align: center; text-decoration: none; color: white; }
-        .icon-circle { width: 50px; height: 50px; background: var(--brand-glow); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; color: var(--brand); }
-        .pulse { color: #22c55e; animation: blink 1.5s infinite; font-weight: 800; }
-        @keyframes blink { 50% { opacity: 0.4; } }
-
-        /* SLIDING ADMIN PANEL */
-        #adminUI { 
-            position: fixed; top: 0; right: -100%; width: 480px; height: 100%; 
-            background: #020617; z-index: 2000; transition: 0.5s cubic-bezier(0.8, 0, 0.2, 1); 
-            padding: 40px; border-left: 1px solid var(--brand); overflow-y: auto;
-            box-shadow: -20px 0 60px rgba(0,0,0,0.8);
+        /* ADMIN PANEL */
+        #adminPanel { 
+            position: fixed; top: 0; right: -100%; width: 500px; height: 100%; 
+            background: #020617; z-index: 2000; transition: 0.8s cubic-bezier(0.8, 0, 0.2, 1); 
+            padding: 50px; border-left: 2px solid var(--brand); overflow-y: auto;
         }
-        #adminUI.open { right: 0; }
-        .admin-section { background: var(--card); padding: 20px; border-radius: 20px; margin-bottom: 20px; border: 1px solid var(--border); }
-        input, select, textarea { width: 100%; background: #000; border: 1px solid var(--border); padding: 14px; border-radius: 12px; color: white; margin-bottom: 12px; outline: none; }
-        input:focus { border-color: var(--brand); }
-        .close-admin { position: absolute; top: 20px; left: 20px; cursor: pointer; font-size: 1.5rem; color: var(--text-dim); }
+        #adminPanel.active { right: 0; }
+        .admin-form { background: var(--card); padding: 30px; border-radius: 25px; border: 1px solid var(--border); }
+        .admin-form input, .admin-form textarea, .admin-form select { 
+            width: 100%; padding: 15px; margin-bottom: 15px; background: #000; border: 1px solid var(--border); border-radius: 15px; color: white;
+        }
 
-        @media (max-width: 600px) { #adminUI { width: 100%; } }
+        /* HIDDEN ELEMENTS */
+        #bgMusic { display: none; }
     </style>
 </head>
 <body>
 
-<header id="mainNav">
+<div class="bg-glow">
+    <div class="orb" style="width: 500px; height: 500px; top: -10%; left: -10%;"></div>
+    <div class="orb" style="width: 400px; height: 400px; bottom: -5%; right: -5%; background: var(--brand-secondary);"></div>
+</div>
+
+<audio id="bgMusic" loop preload="auto">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3" type="audio/mpeg">
+</audio>
+
+<header>
     <div>
-        <div class="logo">IG <span>ELECTRONS</span></div>
-        <div class="logo-subtitle">by Vijay Electronics</div>
+        <div class="logo">Vijay <span>Electronics</span></div>
+        <div style="font-size: 0.6rem; color: var(--text-dim); font-weight: 700; letter-spacing: 1px;">RAILWAY ROAD MUKERIAN</div>
     </div>
-    <div class="admin-login-btn" onclick="openAdmin()">
-        <i class="ph ph-user-circle-gear"></i>
+    <div onclick="toggleAdmin()" style="cursor:pointer; width:45px; height:45px; border-radius:15px; background:var(--border); display:flex; align-items:center; justify-content:center;">
+        <i class="ph ph-user-gear" style="font-size: 1.5rem; color: var(--text-dim);"></i>
     </div>
 </header>
 
-<section class="hero-area">
-    <h2 style="font-size: 2.2rem; margin-bottom: 10px; font-weight: 800;">Modern Home. Modern Prices.</h2>
-    <div class="search-box">
-        <i class="ph ph-magnifying-glass"></i>
-        <input type="text" id="pSearch" placeholder="Search brands or products..." onkeyup="searchProducts()">
+<section class="hero">
+    <div class="feature-box">
+        <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 15px;">Modernized Showcase.</h1>
+        <p style="color: var(--text-dim); font-size: 1.1rem;">Explore premium appliances and gadgets with real-time availability.</p>
+        <div class="search-container">
+            <i class="ph ph-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search by product or brand..." onkeyup="filterProducts()">
+        </div>
     </div>
 </section>
 
-<div class="review-strip">
-    <div class="review-track" id="revTrack">
-        <div class="rev-card"><p>"Best OLED prices in Mukerian area!" <span>— Rajesh, Mukerian</span></p></div>
-        <div class="rev-card"><p>"Genuine products and super fast delivery." <span>— Simran, Dasuya</span></p></div>
-        <div class="rev-card"><p>"Excellent after-sales support." <span>— Amit, Pathankot</span></p></div>
-        <div class="rev-card"><p>"Best dealing on all premium brands." <span>— Vijay, Mukerian</span></p></div>
-    </div>
-</div>
-
 <div class="page-width">
-    <div class="tabs" id="tabList"></div>
     <div id="productGrid" class="grid"></div>
 </div>
 
-<section class="page-width" style="padding-top:0;">
-    <div class="contact-grid">
-        <a href="tel:919876898832" class="contact-card">
-            <div class="icon-circle"><i class="ph-fill ph-phone-call"></i></div>
-            <p>98768-98832</p>
-            <div style="font-size: 0.7rem; color: var(--text-dim); margin-top:5px;">Direct Line</div>
-        </a>
-        <div class="contact-card">
-            <div class="icon-circle"><i class="ph-fill ph-map-pin"></i></div>
-            <p>Railway Road, Mukerian</p>
-            <div style="font-size: 0.7rem; color: var(--text-dim); margin-top:5px;">Vijay Electronics</div>
-        </div>
-        <div class="contact-card">
-            <div class="icon-circle"><i class="ph-fill ph-clock"></i></div>
-            <p>9 AM - 9 PM</p>
-            <div class="pulse" style="font-size: 0.7rem; margin-top:5px;">OPEN ALL DAYS</div>
-        </div>
+<div id="adminPanel">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;">
+        <h2 style="font-weight: 800;">Staff Management</h2>
+        <i class="ph ph-x" onclick="toggleAdmin()" style="font-size: 2rem; cursor:pointer;"></i>
     </div>
-</section>
-
-<div id="adminUI">
-    <i class="ph ph-arrow-right close-admin" onclick="closeAdmin()"></i>
-    <h2 style="margin: 20px 0 30px; font-weight: 800;">Staff Dashboard</h2>
-
-    <div class="admin-section">
-        <h4 style="margin-bottom:15px; color: var(--brand);">Category Management</h4>
-        <div style="display:flex; gap:8px;">
-            <input type="text" id="newCat" placeholder="New category...">
-            <button onclick="addCat()" style="background:var(--brand); border:none; padding:0 20px; height:45px; border-radius:12px; color:white; font-weight:700; cursor:pointer;">Add</button>
-        </div>
-        <div id="catManager" style="margin-top:15px;"></div>
+    
+    <div class="admin-form">
+        <input type="hidden" id="pId">
+        <input type="text" id="pName" placeholder="Product Name">
+        <select id="pCategory">
+            <option value="Appliances">Appliances</option>
+            <option value="Gadgets">Gadgets</option>
+            <option value="Smart Home">Smart Home</option>
+        </select>
+        <input type="number" id="pPrice" placeholder="Price (₹)">
+        <textarea id="pDetails" placeholder="Product Features/Details..." rows="4"></textarea>
+        <input type="file" id="pImage">
+        <button onclick="handleSave()" style="width:100%; padding:20px; border-radius:18px; border:none; background:var(--brand); color:white; font-weight:800; cursor:pointer;">Live Update</button>
     </div>
 
-    <div class="admin-section">
-        <h4 style="margin-bottom:15px; color: var(--brand);">Product Manager</h4>
-        <input type="hidden" id="editId">
-        <input type="text" id="pName" placeholder="Product Title">
-        <select id="pCatSel"></select>
-        <input type="number" id="pPrice" placeholder="Price (INR)">
-        <textarea id="pDesc" placeholder="Features..." rows="2"></textarea>
-        <input type="file" id="pFile" style="padding:10px;">
-        <button onclick="saveProduct()" style="width:100%; padding:16px; background:var(--brand); border:none; border-radius:12px; color:white; font-weight:800; cursor:pointer; margin-top:10px;">Save Product</button>
-    </div>
-
-    <div id="adminInventory"></div>
+    <div id="adminList" style="margin-top:40px;"></div>
 </div>
 
 <script>
+    // FIREBASE CONFIG
     const firebaseConfig = {
         apiKey: "AIzaSyAjhi25Q8urRDAS33nxMl3J3PCh8u8-b64",
         authDomain: "igelectrons.firebaseapp.com",
         projectId: "igelectrons",
-        storageBucket: "igelectrons.firebasestorage.app",
-        messagingSenderId: "373640471784",
-        appId: "1:373640471784:web:00c76eacefce6944b1955d",
         databaseURL: "https://igelectrons-default-rtdb.firebaseio.com"
     };
-
     firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
-    let inventory = [];
-    let cats = ["All", "TV", "Cooling", "Kitchen"];
+    const database = firebase.database();
 
-    // FAST REVIEW SLIDER (2s)
-    let revIdx = 0;
-    setInterval(() => {
-        revIdx = (revIdx + 1) % 4;
-        document.getElementById('revTrack').style.transform = `translateX(-${revIdx * 100}%)`;
-    }, 2000);
+    // BACKGROUND MUSIC - Autoplay bypass logic
+    const music = document.getElementById('bgMusic');
+    const playMusic = () => {
+        music.play().catch(() => {});
+        document.removeEventListener('mousedown', playMusic);
+        document.removeEventListener('scroll', playMusic);
+    };
+    document.addEventListener('mousedown', playMusic);
+    document.addEventListener('scroll', playMusic);
 
-    // DATA LOADING
-    db.ref('categories').on('value', snap => {
-        const val = snap.val();
-        if(val) cats = ["All", ...Object.values(val)];
-        renderCats();
+    // INVENTORY LOGIC
+    let products = [];
+
+    database.ref('inventory').on('value', snapshot => {
+        const data = snapshot.val();
+        products = [];
+        for (let key in data) products.push({ id: key, ...data[key] });
+        renderView(products);
+        renderAdminList();
     });
 
-    db.ref('inventory').on('value', snap => {
-        const val = snap.val();
-        inventory = [];
-        for(let id in val) inventory.push({id, ...val[id]});
-        renderMain(inventory);
-        renderAdminInv();
-    });
-
-    function renderCats() {
-        document.getElementById('tabList').innerHTML = cats.map(c => `<div class="tab ${c==='All'?'active':''}" onclick="filter('${c}', this)">${c}</div>`).join('');
-        document.getElementById('pCatSel').innerHTML = cats.filter(c => c !== 'All').map(c => `<option value="${c}">${c}</option>`).join('');
-        document.getElementById('catManager').innerHTML = cats.filter(c => c !== 'All').map(c => `
-            <div style="display:flex; justify-content:space-between; background:#000; padding:10px; border-radius:10px; margin-bottom:5px; font-size:0.8rem;">
-                <span>${c}</span>
-                <i class="ph ph-trash" onclick="delCat('${c}')" style="color:#ef4444; cursor:pointer;"></i>
-            </div>
-        `).join('');
+    function renderView(items) {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = items.map((p, i) => {
+            const waUrl = `https://wa.me/919876898832?text=${encodeURIComponent(`Hello I found ${p.name} with ${p.details} on your website. How can I purchase?`)}`;
+            return `
+                <div class="card" style="transition-delay: ${i * 50}ms">
+                    <div class="img-wrap"><img src="${p.image}"></div>
+                    <div style="font-size:0.7rem; color:var(--brand-secondary); font-weight:800; text-transform:uppercase;">${p.category}</div>
+                    <h3 style="margin:10px 0; height:45px; overflow:hidden;">${p.name}</h3>
+                    <div class="price">₹${parseInt(p.price).toLocaleString('en-IN')}</div>
+                    <a href="${waUrl}" target="_blank" class="wa-btn">
+                        <i class="ph-fill ph-whatsapp-logo"></i> Inquiry
+                    </a>
+                </div>
+            `;
+        }).join('');
+        
+        setTimeout(() => {
+            document.querySelectorAll('.card').forEach(c => c.classList.add('reveal'));
+        }, 100);
     }
 
-    function renderMain(items) {
-        document.getElementById('productGrid').innerHTML = items.map(p => `
-            <div class="card">
-                <div class="img-box"><img src="${p.img}"></div>
-                <div style="font-size:0.7rem; color:var(--brand); font-weight:800; text-transform:uppercase; letter-spacing:1px;">${p.cat}</div>
-                <h3 style="margin:10px 0; height:45px; overflow:hidden; font-weight:700;">${p.name}</h3>
-                <div class="price">₹${parseInt(p.price).toLocaleString('en-IN')}</div>
-                <a href="https://wa.me/919876898832?text=${encodeURIComponent('Hi IG ELECTRONS, interested in: '+p.name)}" target="_blank" class="buy-btn">
-                    <i class="ph-fill ph-whatsapp-logo"></i> Inquiry
-                </a>
-            </div>
-        `).join('');
+    // ADMIN ACTIONS
+    function toggleAdmin() {
+        if (!document.getElementById('adminPanel').classList.contains('active')) {
+            if (prompt("Enter Access PIN:") !== "ig99") return;
+        }
+        document.getElementById('adminPanel').classList.toggle('active');
     }
 
-    // UTILITIES
-    function openAdmin() { if(prompt("Staff PIN:") === "ig99") document.getElementById('adminUI').classList.add('open'); }
-    function closeAdmin() { document.getElementById('adminUI').classList.remove('open'); }
-    
-    function searchProducts() {
-        const t = document.getElementById('pSearch').value.toLowerCase();
-        renderMain(inventory.filter(p => p.name.toLowerCase().includes(t)));
-    }
+    function handleSave() {
+        const id = document.getElementById('pId').value;
+        const file = document.getElementById('pImage').files[0];
+        
+        const saveData = (imgUrl = null) => {
+            const entry = {
+                name: document.getElementById('pName').value,
+                category: document.getElementById('pCategory').value,
+                price: document.getElementById('pPrice').value,
+                details: document.getElementById('pDetails').value
+            };
+            if(imgUrl) entry.image = imgUrl;
 
-    function filter(c, btn) {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        btn.classList.add('active');
-        renderMain(c === 'All' ? inventory : inventory.filter(p => p.cat === c));
-    }
-
-    // CRUD
-    function addCat() {
-        const v = document.getElementById('newCat').value.trim();
-        if(v) db.ref('categories').push(v).then(() => document.getElementById('newCat').value = '');
-    }
-
-    function delCat(name) {
-        db.ref('categories').once('value', snap => {
-            snap.forEach(c => { if(c.val() === name) c.ref.remove(); });
-        });
-    }
-
-    function saveProduct() {
-        const id = document.getElementById('editId').value;
-        const name = document.getElementById('pName').value;
-        const cat = document.getElementById('pCatSel').value;
-        const price = document.getElementById('pPrice').value;
-        const desc = document.getElementById('pDesc').value;
-        const file = document.getElementById('pFile').files[0];
-
-        const upload = (img = null) => {
-            const data = { name, cat, price, desc };
-            if(img) data.img = img;
-            id ? db.ref('inventory/'+id).update(data) : db.ref('inventory').push(data);
-            ['editId','pName','pPrice','pDesc','pFile'].forEach(i => document.getElementById(i).value = '');
-            alert("Updated!");
+            if(id) {
+                database.ref('inventory/' + id).update(entry);
+            } else {
+                database.ref('inventory').push(entry);
+            }
+            resetForm();
+            alert("Platform updated live!");
         };
 
         if(file) {
-            const r = new FileReader();
-            r.onloadend = () => upload(r.result);
-            r.readAsDataURL(file);
-        } else upload();
+            const reader = new FileReader();
+            reader.onloadend = () => saveData(reader.result);
+            reader.readAsDataURL(file);
+        } else {
+            saveData();
+        }
     }
 
-    function renderAdminInv() {
-        document.getElementById('adminInventory').innerHTML = inventory.map(p => `
-            <div style="background:var(--card); padding:12px; border-radius:15px; margin-bottom:10px; display:flex; justify-content:space-between; border: 1px solid var(--border);">
+    function renderAdminList() {
+        document.getElementById('adminList').innerHTML = products.map(p => `
+            <div style="background:rgba(255,255,255,0.05); padding:15px; border-radius:15px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
                 <span style="font-size:0.8rem;">${p.name}</span>
                 <div>
-                    <i class="ph ph-pencil" onclick="loadEdit('${p.id}')" style="color:var(--brand); margin-right:12px; cursor:pointer;"></i>
-                    <i class="ph ph-trash" onclick="db.ref('inventory/${p.id}').remove()" style="color:#ef4444; cursor:pointer;"></i>
+                    <i class="ph ph-pencil" onclick="editProduct('${p.id}')" style="margin-right:15px; color:var(--brand); cursor:pointer;"></i>
+                    <i class="ph ph-trash" onclick="deleteProduct('${p.id}')" style="color:red; cursor:pointer;"></i>
                 </div>
             </div>
         `).join('');
     }
 
-    function loadEdit(id) {
-        const p = inventory.find(x => x.id === id);
-        document.getElementById('editId').value = p.id;
+    function editProduct(id) {
+        const p = products.find(x => x.id === id);
+        document.getElementById('pId').value = p.id;
         document.getElementById('pName').value = p.name;
-        document.getElementById('pCatSel').value = p.cat;
+        document.getElementById('pCategory').value = p.category;
         document.getElementById('pPrice').value = p.price;
-        document.getElementById('pDesc').value = p.desc;
-        alert("Product loaded into form.");
+        document.getElementById('pDetails').value = p.details;
+    }
+
+    function deleteProduct(id) {
+        if(confirm("Permanently delete this product?")) database.ref('inventory/' + id).remove();
+    }
+
+    function resetForm() {
+        ['pId', 'pName', 'pPrice', 'pDetails', 'pImage'].forEach(id => document.getElementById(id).value = '');
+    }
+
+    function filterProducts() {
+        const val = document.getElementById('searchInput').value.toLowerCase();
+        renderView(products.filter(p => p.name.toLowerCase().includes(val) || p.category.toLowerCase().includes(val)));
     }
 </script>
 
 </body>
-</html>
+    </html>
+    
